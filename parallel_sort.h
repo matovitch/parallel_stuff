@@ -22,7 +22,7 @@ static void thread_manager(RandomAccessIter first, unsigned size,
 										store, size >> 1,
 										first, depth >> 1, brothers);
 	std::thread son1 = std::thread(thread_manager<RandomAccessIter, Compare...>,
-										store + (size >> 1), size >> 1,
+										store + (size >> 1), size - (size >> 1),
 										first + (size >> 1), depth >> 1,
 										brothers + (depth >> 1));
 
