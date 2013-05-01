@@ -1,4 +1,6 @@
-parallel_sort
+parallel_stuff
 =============
 
-Parallel sort only using the STL. Works as std::sort. 
+Implementing some STL algorithms in parallel
+
+Until now : sort, copy.
