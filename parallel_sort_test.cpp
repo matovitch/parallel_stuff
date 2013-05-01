@@ -11,7 +11,7 @@ int main()
 
 	srand(time(NULL));
 	std::generate(tab, tab + TABSIZE, rand);
-	std::parallel_sort(tab , tab + TABSIZE);
+	parallel_sort(tab , tab + TABSIZE);
 	std::copy(tab, tab + TABSIZE, std::ostream_iterator<int>(std::cout,"\n"));
 	
 	delete[] tab;
