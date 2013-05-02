@@ -3,7 +3,6 @@
 
 #include <thread>
 #include <algorithm>
-#include <iostream>
 
 namespace parallel
 {
@@ -44,14 +43,20 @@ template <class InputIterator1, class InputIterator2, class OutputIterator, clas
 
 	}
 
-		pool[cores - 1] = std::thread(std::merge<InputIterator1, 
-								InputIterator2, OutputIterator, Compare...>, 
-								begins[cores - 1],
-								last1,
-								ends[cores - 1],
-								last2,
-								result + offset,
-								comp...);
+	pool[cores - 1] = std::thread(std::merge<InputIterator1, 
+							InputIterator2, OutputIterator, Compare...>, 
+							begins[cores - 1],
+							last1,
+							ends[cores - 1],
+							last2,
+							result + offset,
+							comp...);
+
+	for (int i = 0; i < cores; i++)
+		pool[i].join();
+
+	delete[] pool;
+
 	return result;
 }
 
