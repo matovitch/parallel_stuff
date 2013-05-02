@@ -3,6 +3,10 @@
 
 #include <thread>
 #include <algorithm>
+#include "parallel_merge.h"
+
+namespace parallel
+{
 
 template <class RandomAccessIter, class... Compare>
 static void thread_manager(RandomAccessIter first, unsigned size,
@@ -68,14 +72,14 @@ static void thread_manager(RandomAccessIter first, unsigned size,
 
 }
 
-template <class RandomAccessIter, class... Compare>
-void parallel_sort(RandomAccessIter first, RandomAccessIter last)
+template <unsigned Cores = 0, class RandomAccessIter, class... Compare>
+void sort(RandomAccessIter first, RandomAccessIter last)
 {
 	typedef typename std::iterator_traits<RandomAccessIter>::value_type T;
 	T* store = new T[last - first];
 
-	unsigned cores = std::thread::hardware_concurrency();
-	unsigned log2cores = std::log2(std::max(1, cores));
+	unsigned cores = (Cores != 0) ? Cores : std::thread::hardware_concurrency();
+	unsigned log2cores = std::log2(std::max((unsigned)1, cores));
 	cores = 1 << log2cores;
 
 	std::thread* pool = new std::thread[cores];
@@ -96,6 +100,8 @@ void parallel_sort(RandomAccessIter first, RandomAccessIter last)
 	}
 
 	delete[] store; 
+}
+
 }
 
 #endif
