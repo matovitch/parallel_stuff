@@ -9,7 +9,7 @@ namespace parallel
 
 template <class InputIterator, class OutputIterator>
 OutputIterator copy (InputIterator first, InputIterator last, OutputIterator result,
-                    int cores = std::thread::hardware_concurrency())
+                     int cores = std::thread::hardware_concurrency())
 {
     if (cores < 1) cores = 1;
     std::thread* pool = new std::thread[cores];

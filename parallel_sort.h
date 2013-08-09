@@ -10,7 +10,7 @@ namespace parallel
 
 template <class RandomAccessIter, class... Compare>
 static void thread_manager(RandomAccessIter first, unsigned size,
-                          RandomAccessIter store, unsigned cores)
+                           RandomAccessIter store, unsigned cores)
 {
     if (cores == 1)
     {
