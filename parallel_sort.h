@@ -35,7 +35,7 @@ static void thread_manager(RandomAccessIter first, unsigned size,
 
 }
 
-template <unsigned Cores = 0, class RandomAccessIter, class... Compare>
+template <class RandomAccessIter, class... Compare>
 void sort(RandomAccessIter first, RandomAccessIter last, 
 			int cores = std::thread::hardware_concurrency())
 {
